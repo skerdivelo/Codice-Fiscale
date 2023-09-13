@@ -1,0 +1,90 @@
+.container{
+    background-color: tomato;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    width: auto;
+    height:600px;
+}
+
+#titolo{
+    background-color: green;
+}
+
+#nome{
+    border-radius: 10px;
+    height: 30px;
+    width: 350px;
+    border-color: aqua;
+}
+#nome::placeholder{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    top: 3px;
+}
+
+#nome:hover{
+    box-shadow: 0 0 11px;
+}
+
+#cognome{
+    border-radius: 10px;
+    height: 30px;
+    width: 350px;
+    border-color: aqua;
+}
+#cognome::placeholder{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    top: 3px;
+}
+
+#cognome:hover{
+    box-shadow: 0 0 11px;
+}
+
+#dataNascita{
+    border-radius: 10px;
+    height: 30px;
+    width: 250px;
+    text-align: center;
+    border-color: aqua;
+}
+
+#dataNascita:hover{
+    box-shadow: 0 0 11px;
+}
+
+#sesso{
+    border-radius: 10px;
+    height: 30px;
+    width: 250px;
+    text-align: center;
+    border-color: aqua;
+}
+
+#sesso:hover{
+    box-shadow: 0 0 11px;
+}
+
+#luogoNascita{
+    border-radius: 10px;
+    height: 30px;
+    width: 350px;
+    border-color: aqua;
+}
+
+#luogoNascita::placeholder{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    top: 3px;
+}
+
+#luogoNascita:hover{
+    box-shadow: 0 0 11px;
+}
