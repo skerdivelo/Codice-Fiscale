@@ -88,3 +88,30 @@
 #luogoNascita:hover{
     box-shadow: 0 0 11px;
 }
+
+#inserisciDatiBtn{
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 30px;
+    width: 350px;
+    border-color: aqua;
+    background-color: green;
+    color: white;
+    font-size: large;
+}
+
+#inserisciDatiBtn:hover{
+    box-shadow: 0 0 11px;
+}
+
+#inserisciDatiBtn:active{
+    background-color: red;
+}
+
+#inserisciDatiBtn:focus{
+    outline: none;
+}
+
+#inserisciDatiBtn:disabled{
+    background-color: grey;
+}
