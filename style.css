@@ -6,7 +6,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: relative;
     width: auto;
-    height:600px;
+    height:700px;
 }
 
 #titolo{
@@ -68,6 +68,24 @@
 }
 
 #sesso:hover{
+    box-shadow: 0 0 11px;
+}
+
+#provincia{
+    border-radius: 10px;
+    height: 30px;
+    width: 130px;
+    border-color: aqua; 
+}
+
+#provincia::placeholder{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    top: 3px;
+}
+
+#provincia:hover{
     box-shadow: 0 0 11px;
 }
 
