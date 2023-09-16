@@ -1,95 +1,108 @@
-const nome = document.getElementById('nome');
-const cognome = document.getElementById('cognome');
-const dataNascita = document.getElementById('dataNascita');
-const sesso = document.getElementById('sesso');
-const luogoNascita = document.getElementById('luogoNascita');
-const inserisciDati = document.getElementById('inserisciDatiBtn');
-
-// Funzione per calcolare il codice fiscale
 function calcolaCodiceFiscale() {
-    const cognomeVal = cognome.value.toUpperCase();
-    const nomeVal = nome.value.toUpperCase();
-    const dataNascitaVal = dataNascita.value;
-    const sessoVal = sesso.value;
-    const luogoNascitaVal = luogoNascita.value.toUpperCase();
-  
-    // Estrai le consonanti dal cognome (prime tre) e dal nome (prime tre)
-    const cognomeConsonanti = estraiConsonanti(cognomeVal);
-    const nomeConsonanti = estraiConsonanti(nomeVal);
-  
-    // Estrai l'anno di nascita (ultime due cifre)
-    const annoNascita = dataNascitaVal.substring(2, 4);
-  
-    // Estrai il mese di nascita in base alla tabella fornita
-    const meseNascita = calcolaMeseNascita(dataNascitaVal);
-  
-    // Estrai il giorno di nascita e il sesso
-    const giornoNascita = dataNascitaVal.substring(8, 10);
-    const sessoCode = calcolaSessoCode(sessoVal);
-  
-    // Estrai il codice catastale o Stato di nascita (quattro caratteri)
-    const luogoNascitaCode = luogoNascitaVal.substring(0, 4).toUpperCase();
-  
-    // Calcola il carattere di controllo
-    const carattereControllo = calcolaCarattereControllo(
-      cognomeConsonanti + nomeConsonanti + annoNascita + meseNascita + giornoNascita + sessoCode + luogoNascitaCode
-    );
-  
-    // Crea il codice fiscale completo
-    const codiceFiscale = cognomeConsonanti + nomeConsonanti + annoNascita + meseNascita + giornoNascita + sessoCode + luogoNascitaCode + carattereControllo;
-  
-    // Visualizza il codice fiscale o fai qualsiasi altra cosa desideri
-    alert(`Il tuo codice fiscale è: ${codiceFiscale}`);
+  const cognome = document.getElementById('cognome').value.toUpperCase();
+  const nome = document.getElementById('nome').value.toUpperCase();
+  const dataNascita = new Date(document.getElementById('dataNascita').value);
+  const sesso = document.getElementById('sesso').value;
+  const luogoNascita = document.getElementById('luogoNascita').value.toUpperCase();
+
+  const annoNascita = dataNascita.getFullYear() % 100;
+  const meseNascita = dataNascita.getMonth() + 1;
+  const giornoNascita = dataNascita.getDate();
+
+  const vocali = ['A', 'E', 'I', 'O', 'U'];
+  const consonanti = 'BCDFGHJKLMNPQRSTVWXYZ';
+
+  // Calcola i caratteri per il cognome
+  let caratteriCognome = '';
+  for (const char of cognome) {
+    if (consonanti.includes(char)) {
+      caratteriCognome += char;
+      if (caratteriCognome.length === 3) break;
+    }
   }
-  
-  // Funzione per estrarre le consonanti da una stringa
-  function estraiConsonanti(stringa) {
-    const consonanti = [];
-    for (let i = 0; i < stringa.length && consonanti.length < 3; i++) {
-      const carattere = stringa[i];
-      if ('BCDFGHJKLMNPQRSTVWXYZ'.includes(carattere)) {
-        consonanti.push(carattere);
+
+  if (caratteriCognome.length < 3) {
+    for (const char of cognome) {
+      if (vocali.includes(char)) {
+        caratteriCognome += char;
+        if (caratteriCognome.length === 3) break;
       }
     }
-    while (consonanti.length < 3) {
-      consonanti.push('X');
+  }
+
+  while (caratteriCognome.length < 3) {
+    caratteriCognome += 'X';
+  }
+
+  // Calcola i caratteri per il nome
+  let caratteriNome = '';
+  for (const char of nome) {
+    if (consonanti.includes(char)) {
+      caratteriNome += char;
+      if (caratteriNome.length === 3) break;
     }
-    return consonanti.join('');
   }
-  
-  // Funzione per calcolare il mese di nascita in base alla data
-  function calcolaMeseNascita(dataNascita) {
-    const mesi = "ABCDEHLMPRST";
-    const meseIndex = parseInt(dataNascita.substring(5, 7)) - 1;
-    return mesi[meseIndex];
-  }
-  
-  // Funzione per calcolare il codice del sesso
-  function calcolaSessoCode(sesso) {
-    return sesso === 'femmina' ? '4' : '0';
-  }
-  
-  // Funzione per calcolare il carattere di controllo
-  function calcolaCarattereControllo(codiceParziale) {
-    const caratteriDispari = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const caratteriPari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let sommaDispari = 0;
-    let sommaPari = 0;
-  
-    for (let i = 0; i < codiceParziale.length; i++) {
-      const carattere = codiceParziale[i];
-      if (i % 2 === 0) {
-        sommaPari += caratteriPari.indexOf(carattere);
-      } else {
-        sommaDispari += caratteriDispari.indexOf(carattere);
+
+  if (caratteriNome.length < 3) {
+    for (const char of nome) {
+      if (vocali.includes(char)) {
+        caratteriNome += char;
+        if (caratteriNome.length === 3) break;
       }
     }
-  
-    const resto = (sommaDispari + sommaPari) % 26;
-    return caratteriPari[resto];
   }
+
+  while (caratteriNome.length < 3) {
+    caratteriNome += 'X';
+  }
+
+  // Calcola i caratteri per la data di nascita e sesso
+  let caratteriDataSesso = '';
+  const giornoSesso = sesso === 'femmina' ? giornoNascita + 40 : giornoNascita;
+  caratteriDataSesso += annoNascita.toString().padStart(2, '0').slice(-2);
   
-  // Aggiungi un gestore di eventi al pulsante "Inserisci Dati"
-  inserisciDati.addEventListener('click', calcolaCodiceFiscale);
+  const mesi = {
+    1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 6: 'H', 7: 'L', 8: 'M', 9: 'P', 10: 'R', 11: 'S', 12: 'T'
+  };
   
+  caratteriDataSesso += mesi[meseNascita];
   
+  caratteriDataSesso += giornoSesso.toString().padStart(2, '0');
+
+  // Genera un codice di 3 numeri random
+  const codiceNumerico = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+
+  // Calcola il codice fiscale senza il carattere di controllo
+  const codiceFiscaleParziale = caratteriCognome + caratteriNome + caratteriDataSesso + luogoNascita.charAt(0) + codiceNumerico;
+
+  // Calcola il carattere di controllo
+  const carattereControllo = calcolaCarattereControllo(codiceFiscaleParziale);
+
+  // Visualizza il codice fiscale risultante
+  const codiceFiscaleCompleto = codiceFiscaleParziale + carattereControllo;
+  alert("Codice Fiscale: " + codiceFiscaleCompleto);
+}
+
+function calcolaCarattereControllo(codice) {
+  const caratteriPari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const caratteriDispari = "BAKPLCQDREVOSFTGJHNUWMXZY";
+  let sommaDispari = 0;
+  let sommaPari = 0;
+
+  for (let i = 0; i < 15; i++) {
+    const carattere = codice.charAt(i);
+
+    if (i % 2 === 0) {
+      sommaPari += caratteriPari.indexOf(carattere);
+    } else {
+      sommaDispari += caratteriDispari.indexOf(carattere);
+    }
+  }
+
+  const totale = sommaPari + sommaDispari;
+  const carattereControllo = String.fromCharCode(65 + (totale % 26));
+  return carattereControllo;
+}
+
+const inserisciDati = document.getElementById('inserisciDatiBtn');
+inserisciDati.addEventListener('click', calcolaCodiceFiscale);
