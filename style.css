@@ -1,135 +1,76 @@
-.container{
-    background-color: tomato;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.container {
+    background-color: #f2f2f2;
+    border: 1px solid #333;
+    border-radius: 10px;
+    font-family: 'Helvetica Neue', sans-serif;
     position: relative;
     width: auto;
-    height:700px;
+    height: 860px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-#titolo{
-    background-color: green;
-}
-
-#nome{
-    border-radius: 10px;
-    height: 30px;
-    width: 350px;
-    border-color: aqua;
-}
-#nome::placeholder{
-    text-align: center;
-    font-size: large;
-    position: relative;
-    top: 3px;
-}
-
-#nome:hover{
-    box-shadow: 0 0 11px;
-}
-
-#cognome{
-    border-radius: 10px;
-    height: 30px;
-    width: 350px;
-    border-color: aqua;
-}
-#cognome::placeholder{
-    text-align: center;
-    font-size: large;
-    position: relative;
-    top: 3px;
-}
-
-#cognome:hover{
-    box-shadow: 0 0 11px;
-}
-
-#dataNascita{
-    border-radius: 10px;
-    height: 30px;
-    width: 250px;
-    text-align: center;
-    border-color: aqua;
-}
-
-#dataNascita:hover{
-    box-shadow: 0 0 11px;
-}
-
-#sesso{
-    border-radius: 10px;
-    height: 30px;
-    width: 250px;
-    text-align: center;
-    border-color: aqua;
-}
-
-#sesso:hover{
-    box-shadow: 0 0 11px;
-}
-
-#provincia{
-    border-radius: 10px;
-    height: 30px;
-    width: 130px;
-    border-color: aqua; 
-}
-
-#provincia::placeholder{
-    text-align: center;
-    font-size: large;
-    position: relative;
-    top: 3px;
-}
-
-#provincia:hover{
-    box-shadow: 0 0 11px;
-}
-
-#luogoNascita{
-    border-radius: 10px;
-    height: 30px;
-    width: 350px;
-    border-color: aqua;
-}
-
-#luogoNascita::placeholder{
-    text-align: center;
-    font-size: large;
-    position: relative;
-    top: 3px;
-}
-
-#luogoNascita:hover{
-    box-shadow: 0 0 11px;
-}
-
-#inserisciDatiBtn{
-    margin-top: 20px;
-    border-radius: 10px;
-    height: 30px;
-    width: 350px;
-    border-color: aqua;
-    background-color: green;
+#titolo {
+    background-color: #006400;
     color: white;
-    font-size: large;
+    font-size: 36px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 
-#inserisciDatiBtn:hover{
-    box-shadow: 0 0 11px;
+input[type="text"], select, input[type="date"] {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: none;
+    font-size: 18px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    transition: all 0.3s ease;
+    width: 350px;
 }
 
-#inserisciDatiBtn:active{
-    background-color: red;
+input[type="text"]:hover, select:hover, input[type="date"]:hover {
+    box-shadow: 0 0 11px #ccc;
 }
 
-#inserisciDatiBtn:focus{
+input[type="text"]:focus, select:focus, input[type="date"]:focus {
+    background-color: #f2f2f2;
+    border-color: #006400;
+    box-shadow: 0 0 11px #006400;
     outline: none;
 }
 
-#inserisciDatiBtn:disabled{
+#inserisciDatiBtn {
+    background-color: #006400;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+#inserisciDatiBtn:hover {
+    box-shadow: 0 0 11px #006400;
+}
+
+#inserisciDatiBtn:active {
+    background-color: #004400;
+    box-shadow: none;
+}
+
+#inserisciDatiBtn:disabled {
     background-color: grey;
+    cursor: not-allowed;
+}
+
+#sesso {
+    width: 360px;
+    height: 40px;
 }
