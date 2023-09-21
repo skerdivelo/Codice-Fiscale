@@ -71,7 +71,7 @@ function calcolaCodiceFiscale() {
   caratteriDataSesso += giornoSesso.toString().padStart(2, '0');
 
   // Genera un codice di 3 numeri random se la provincia non è presente
-  let codiceNumerico = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+  let codiceNumerico = '';
   
   const codiciCitta = {
     'BS': 'B157' , 'MI': 'F205' , 'NA': 'F839' , 'RM': 'H501' , 'VE': 'L736'
@@ -79,6 +79,8 @@ function calcolaCodiceFiscale() {
 
   if (provincia in codiciCitta) {
     codiceNumerico = codiciCitta[provincia];
+  }else{
+    codiceNumerico = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
   }
 
   // Calcola il codice fiscale senza il carattere di controllo
@@ -92,28 +94,22 @@ function calcolaCodiceFiscale() {
   alert("Codice Fiscale: " + codiceFiscaleCompleto);
 }
 
-function calcolaCarattereControllo(codice) {
-  const caratteriPari = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const caratteriDispari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let sommaDispari = 0;
-  let sommaPari = 0;
+function calcolaCarattereControllo(codiceFiscaleParziale) {
+  const caratteriPari = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const caratteriDispari = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let somma = 0;
 
   for (let i = 0; i < 15; i++) {
-    const carattere = codice.charAt(i);
-
     if (i % 2 === 0) {
-      sommaPari += caratteriPari.indexOf(carattere);
+      somma += caratteriPari.indexOf(codiceFiscaleParziale[i]);
     } else {
-      sommaDispari += caratteriDispari.indexOf(carattere);
+      somma += caratteriDispari.indexOf(codiceFiscaleParziale[i]);
     }
   }
 
-  const totale = sommaPari + sommaDispari;
-  const resto = totale % 26;
-  const carattereControllo = caratteriDispari.charAt(resto);
+  const carattereControllo = caratteriDispari[somma % 26];
   return carattereControllo;
 }
-
 
 const inserisciDati = document.getElementById('inserisciDatiBtn');
 inserisciDati.addEventListener('click', calcolaCodiceFiscale);
