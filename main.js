@@ -90,6 +90,7 @@ function calcolaCodiceFiscale(event) {
     codiceNumerico = codiciCitta[provincia];
   }else{
     alert('La provincia inserita non è valida.');
+    return;
   }
 
   // Calcolo il codice fiscale senza il carattere di controllo
