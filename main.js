@@ -94,9 +94,9 @@ function calcolaCodiceFiscale() {
   alert("Codice Fiscale: " + codiceFiscaleCompleto);
 }
 
-function calcolaCarattereControllo(input) 
-{
-  const evenTable = 
+function calcolaCarattereControllo(codiceFiscaleParziale){
+
+  const tabellaC = 
   {
     'A': 0, 'F': 5, 'K': 10, 'P': 15, 'U': 20,
     'B': 1, 'G': 6, 'L': 11, 'Q': 16, 'V': 21,
@@ -107,7 +107,7 @@ function calcolaCarattereControllo(input)
     '5': 5, '6': 6, '7': 7, '8': 8, '9' : 9
   };
 
-  const oddTable = 
+  const tabellaD = 
   {
     'A': 1, 'F': 13, 'K': 2, 'P': 3, 'U': 16,
     'B': 0, 'G': 15, 'L': 4, 'Q': 6, 'V': 10,
@@ -118,7 +118,7 @@ function calcolaCarattereControllo(input)
     '5': 13, '6': 15, '7': 17, '8': 19, '9': 21
   };
 
-  const checkDigitTable = 
+  const tabellaE = 
   {
     0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E',
     5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'J',
@@ -128,18 +128,17 @@ function calcolaCarattereControllo(input)
     25: 'Z'
   }; 
 
-
-  var sum = 0;
+  let somma = 0;
   for (let i = 1; i <= 15; i++) 
   {
     if (i % 2 === 0){
-      sum += evenTable[input[i - 1]];
+      somma += tabellaC[codiceFiscaleParziale[i - 1]];
     }else{
-      sum += oddTable[input[i - 1]];
+      somma += tabellaD[codiceFiscaleParziale[i - 1]];
     }
   }
-  var remainder = sum % 26;
-  return checkDigitTable[remainder];
+  let resto = somma % 26;
+  return tabellaE[resto];
 }
 
 const inserisciDati = document.getElementById('inserisciDatiBtn');
