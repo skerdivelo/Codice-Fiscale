@@ -5,11 +5,12 @@
     font-family: 'Helvetica Neue', sans-serif;
     position: relative;
     width: auto;
-    height: 860px;
+    height: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 #titolo {
@@ -73,4 +74,10 @@ input[type="text"]:focus, select:focus, input[type="date"]:focus {
 #sesso {
     width: 360px;
     height: 40px;
+}
+
+.output{
+    margin-top: 40px;
+    font-weight: bolder;
+    font-size: 24px;
 }

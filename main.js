@@ -1,10 +1,12 @@
-function calcolaCodiceFiscale() {
-  const cognome = document.getElementById('cognome').value.toUpperCase();
-  const nome = document.getElementById('nome').value.toUpperCase();
+function calcolaCodiceFiscale(event) {
+  event.preventDefault();
+  const cognome = document.getElementById('cognome').value.trim().toUpperCase();
+  const nome = document.getElementById('nome').value.trim().toUpperCase();
   const dataNascita = new Date(document.getElementById('dataNascita').value);
   const sesso = document.getElementById('sesso').value;
-  const luogoNascita = document.getElementById('luogoNascita').value.toUpperCase();
-  const provincia = document.getElementById('provincia').value.toUpperCase();
+  const luogoNascita = document.getElementById('luogoNascita').value.trim().toUpperCase();
+  const provincia = document.getElementById('provincia').value.trim().toUpperCase();
+  const codiceFiscaleOutput = document.getElementById('codiceFiscale');
 
   const annoNascita = dataNascita.getFullYear() % 100;
   const meseNascita = dataNascita.getMonth() + 1;
@@ -12,8 +14,20 @@ function calcolaCodiceFiscale() {
 
   const vocali = ['A', 'E', 'I', 'O', 'U'];
   const consonanti = 'BCDFGHJKLMNPQRSTVWXYZ';
+
   
-  // Calcola i caratteri per il cognome
+  if (
+    cognome === '' ||
+    nome === '' ||
+    isNaN(dataNascita.getTime()) ||
+    luogoNascita === '' ||
+    provincia === ''
+  ) {
+    alert('Tutti i campi obbligatori devono essere compilati.');
+    return;
+  }
+
+  // Calcolo i caratteri per il cognome
   let caratteriCognome = '';
   for (const char of cognome) {
     if (consonanti.includes(char)) {
@@ -35,7 +49,7 @@ function calcolaCodiceFiscale() {
     caratteriCognome += 'X';
   }
 
-  // Calcola i caratteri per il nome
+  // Calcolo i caratteri per il nome
   let caratteriNome = '';
   for (const char of nome) {
     if (consonanti.includes(char)) {
@@ -57,7 +71,7 @@ function calcolaCodiceFiscale() {
     caratteriNome += 'X';
   }
 
-  // Calcola i caratteri per la data di nascita e sesso
+  // Calcolo i caratteri per la data di nascita e sesso
   let caratteriDataSesso = '';
   const giornoSesso = sesso === 'femmina' ? giornoNascita + 40 : giornoNascita;
   caratteriDataSesso += annoNascita.toString().padStart(2, '0').slice(-2);
@@ -70,28 +84,23 @@ function calcolaCodiceFiscale() {
   
   caratteriDataSesso += giornoSesso.toString().padStart(2, '0');
 
-  // Genera un codice di 3 numeri random se la provincia non è presente
   let codiceNumerico = '';
   
-  const codiciCitta = {
-    'BS': 'B157' , 'MI': 'F205' , 'NA': 'F839' , 'RM': 'H501' , 'VE': 'L736'
-  };
-
   if (provincia in codiciCitta) {
     codiceNumerico = codiciCitta[provincia];
   }else{
-    codiceNumerico = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    alert('La provincia inserita non è valida.');
   }
 
-  // Calcola il codice fiscale senza il carattere di controllo
+  // Calcolo il codice fiscale senza il carattere di controllo
   const codiceFiscaleParziale = caratteriCognome + caratteriNome + caratteriDataSesso + codiceNumerico;
 
-  // Calcola il carattere di controllo
+  // Calcolo il carattere di controllo
   const carattereControllo = calcolaCarattereControllo(codiceFiscaleParziale);
 
-  // Visualizza il codice fiscale risultante
+  // Visualizzo il codice fiscale risultante
   const codiceFiscaleCompleto = codiceFiscaleParziale + carattereControllo;
-  alert("Codice Fiscale: " + codiceFiscaleCompleto);
+  codiceFiscaleOutput.innerHTML = "Il tuo codice fiscale: "+codiceFiscaleCompleto;
 }
 
 function calcolaCarattereControllo(codiceFiscaleParziale){
@@ -141,4 +150,15 @@ function calcolaCarattereControllo(codiceFiscaleParziale){
 }
 
 const inserisciDati = document.getElementById('inserisciDatiBtn');
+document.addEventListener('keyup', function(event) {
+  if (event.keyCode === 13) {
+    inserisciDati.click();
+  }
+});
+
+
 inserisciDati.addEventListener('click', calcolaCodiceFiscale);
+
+const codiciCitta = {
+  'BS': 'B157' , 'MI': 'F205' , 'NA': 'F839' , 'RM': 'H501' , 'VE': 'L736'
+};
