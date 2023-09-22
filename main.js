@@ -27,6 +27,11 @@ function calcolaCodiceFiscale(event) {
     return;
   }
 
+  if (cognome.length < 2 || nome.length < 2) {
+    alert('Il cognome e il nome devono essere composti da almeno 2 caratteri.');
+    return;
+  }
+
   // Calcolo i caratteri per il cognome
   let caratteriCognome = '';
   for (const char of cognome) {
@@ -161,5 +166,115 @@ document.addEventListener('keyup', function(event) {
 inserisciDati.addEventListener('click', calcolaCodiceFiscale);
 
 const codiciCitta = {
-  'BS': 'B157' , 'MI': 'F205' , 'NA': 'F839' , 'RM': 'H501' , 'VE': 'L736'
+  'AG': 'A003', // Agrigento
+  'AL': 'A004', // Alessandria
+  'AN': 'A005', // Ancona
+  'AO': 'A006', // Aosta
+  'AR': 'A007', // Arezzo
+  'AP': 'A008', // Ascoli Piceno
+  'AT': 'A009', // Asti
+  'AV': 'A010', // Avellino
+  'BA': 'A011', // Bari
+  'BT': 'A012', // Barletta-Andria-Trani
+  'BL': 'A013', // Belluno
+  'BN': 'A014', // Benevento
+  'BG': 'A015', // Bergamo
+  'BI': 'A016', // Biella
+  'BO': 'A017', // Bologna
+  'BZ': 'A018', // Bolzano
+  'BS': 'B157', // Brescia
+  'BR': 'A019', // Brindisi
+  'CA': 'A020', // Cagliari
+  'CL': 'A021', // Caltanissetta
+  'CB': 'A022', // Campobasso
+  'CI': 'A023', // Carbonia-Iglesias
+  'CE': 'A024', // Caserta
+  'CT': 'A025', // Catania
+  'CZ': 'A026', // Catanzaro
+  'CH': 'A027', // Chieti
+  'CO': 'A028', // Como
+  'CS': 'A029', // Cosenza
+  'CR': 'A030', // Cremona
+  'KR': 'A031', // Crotone
+  'CN': 'A032', // Cuneo
+  'EN': 'A033', // Enna
+  'FM': 'A034', // Fermo
+  'FE': 'A035', // Ferrara
+  'FI': 'A036', // Firenze
+  'FG': 'A037', // Foggia
+  'FC': 'A038', // Forlì-Cesena
+  'FR': 'A039', // Frosinone
+  'GE': 'A040', // Genova
+  'GO': 'A041', // Gorizia
+  'GR': 'A042', // Grosseto
+  'IM': 'A043', // Imperia
+  'IS': 'A044', // Isernia
+  'SP': 'A045', // La Spezia
+  'AQ': 'A046', // L'Aquila
+  'LT': 'A047', // Latina
+  'LE': 'A048', // Lecce
+  'LC': 'A049', // Lecco
+  'LI': 'A050', // Livorno
+  'LO': 'A051', // Lodi
+  'LU': 'A052', // Lucca
+  'MC': 'A053', // Macerata
+  'MN': 'A054', // Mantova
+  'MS': 'A055', // Massa-Carrara
+  'MT': 'A056', // Matera
+  'VS': 'A057', // Medio Campidano
+  'ME': 'A058', // Messina
+  'MI': 'F205', // Milano
+  'MO': 'A059', // Modena
+  'MB': 'A060', // Monza e Brianza
+  'NA': 'F839', // Napoli
+  'NO': 'A061', // Novara
+  'NU': 'A062', // Nuoro
+  'OG': 'A063', // Ogliastra
+  'OT': 'A064', // Olbia-Tempio
+  'OR': 'A065', // Oristano
+  'PD': 'A066', // Padova
+  'PA': 'A067', // Palermo
+  'PR': 'A068', // Parma
+  'PV': 'A069', // Pavia
+  'PG': 'A070', // Perugia
+  'PU': 'A071', // Pesaro e Urbino
+  'PE': 'A072', // Pescara
+  'PC': 'A073', // Piacenza
+  'PI': 'A074', // Pisa
+  'PT': 'A075', // Pistoia
+  'PN': 'A076', // Pordenone
+  'PZ': 'A077', // Potenza
+  'PO': 'A078', // Prato
+  'RG': 'A079', // Ragusa
+  'RA': 'A080', // Ravenna
+  'RC': 'A081', // Reggio Calabria
+  'RE': 'A082', // Reggio Emilia
+  'RI': 'A083', // Rieti
+  'RN': 'A084', // Rimini
+  'RM': 'H501', // Roma
+  'RO': 'A085', // Rovigo
+  'SA': 'A086', // Salerno
+  'VS': 'A087', // Sanluri
+  'SS': 'A088', // Sassari
+  'SV': 'A089', // Savona
+  'SI': 'A090', // Siena
+  'SR': 'A091', // Siracusa
+  'SO': 'A092', // Sondrio
+  'TA': 'A093', // Taranto
+  'TE': 'A094', // Teramo
+  'TR': 'A095', // Terni
+  'TO': 'A096', // Torino
+  'TP': 'A097', // Trapani
+  'TN': 'A098', // Trento
+  'TV': 'A099', // Treviso
+  'TS': 'A100', // Trieste
+  'UD': 'A101', // Udine
+  'VA': 'A102', // Varese
+  'VE': 'L736', // Venezia
+  'VB': 'A103', // Verbano-Cusio-Ossola
+  'VC': 'A104', // Vercelli
+  'VR': 'A105', // Verona
+  'VV': 'A106', // Vibo Valentia
+  'VI': 'A107', // Vicenza
+  'VT': 'A108', // Viterbo
 };
