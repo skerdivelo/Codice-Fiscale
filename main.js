@@ -94,21 +94,52 @@ function calcolaCodiceFiscale() {
   alert("Codice Fiscale: " + codiceFiscaleCompleto);
 }
 
-function calcolaCarattereControllo(codiceFiscaleParziale) {
-  const caratteriPari = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const caratteriDispari = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let somma = 0;
+function calcolaCarattereControllo(input) 
+{
+  const evenTable = 
+  {
+    'A': 0, 'F': 5, 'K': 10, 'P': 15, 'U': 20,
+    'B': 1, 'G': 6, 'L': 11, 'Q': 16, 'V': 21,
+    'C': 2, 'H': 7, 'M': 12, 'R': 17, 'W': 22,
+    'D': 3, 'I': 8, 'N': 13, 'S': 18, 'X': 23,
+    'E': 4, 'J': 9, 'O': 14, 'T': 19, 'Y': 24,
+    'Z': 25, '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+    '5': 5, '6': 6, '7': 7, '8': 8, '9' : 9
+  };
 
-  for (let i = 0; i < 15; i++) {
-    if (i % 2 === 0) {
-      somma += caratteriPari.indexOf(codiceFiscaleParziale[i]);
-    } else {
-      somma += caratteriDispari.indexOf(codiceFiscaleParziale[i]);
+  const oddTable = 
+  {
+    'A': 1, 'F': 13, 'K': 2, 'P': 3, 'U': 16,
+    'B': 0, 'G': 15, 'L': 4, 'Q': 6, 'V': 10,
+    'C': 5, 'H': 17, 'M': 18, 'R': 8, 'W': 22,
+    'D': 7, 'I': 19, 'N': 20, 'S': 12, 'X': 25,
+    'E': 9, 'J': 21, 'O': 11, 'T': 14, 'Y': 24,
+    'Z': 23, '0': 1, '1': 0, '2': 5, '3': 7, '4': 9,
+    '5': 13, '6': 15, '7': 17, '8': 19, '9': 21
+  };
+
+  const checkDigitTable = 
+  {
+    0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E',
+    5: 'F', 6: 'G', 7: 'H', 8: 'I', 9: 'J',
+    10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O',
+    15: 'P', 16: 'Q', 17: 'R', 18: 'S', 19: 'T',
+    20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y',
+    25: 'Z'
+  }; 
+
+
+  var sum = 0;
+  for (let i = 1; i <= 15; i++) 
+  {
+    if (i % 2 === 0){
+      sum += evenTable[input[i - 1]];
+    }else{
+      sum += oddTable[input[i - 1]];
     }
   }
-
-  const carattereControllo = caratteriDispari[somma % 26];
-  return carattereControllo;
+  var remainder = sum % 26;
+  return checkDigitTable[remainder];
 }
 
 const inserisciDati = document.getElementById('inserisciDatiBtn');

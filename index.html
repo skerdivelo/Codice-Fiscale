@@ -11,21 +11,21 @@
         <div class="input">
             <h1 id="titolo">Calcolatore Codice Fiscale</h1>
             <h3>Nome</h3>
-            <input id="nome" type="text" required placeholder="Inserisci il nome" >
+            <input id="nome" type="text" placeholder="Inserisci il nome" required>
             <h3>Cognome</h3>
-            <input type="text" id="cognome" required placeholder="Inserisci il cognome" >
+            <input type="text" id="cognome" placeholder="Inserisci il cognome" required>
             <h3>Data Di Nascità</h3>
-            <input type="date" name="dataDiNascita" id="dataNascita">
+            <input type="date" name="dataDiNascita" id="dataNascita" required>
             <h3>Sesso</h3>
             <select name="sesso" id="sesso">
                 <option value="maschio">Maschio</option>
                 <option value="femmina">Femmina</option>
             </select>
             <br>
-            <h3>Provincia</h3>
-            <input type="text" id="provincia" required placeholder="Provincia">
+            <h3>Provincia (Sigla)</h3>
+            <input type="text" id="provincia" placeholder="Provincia" maxlength="3" required>
             <h3>Luogo Di Nascità</h3>
-            <input type="text" name="luogoNascita" id="luogoNascita" placeholder="Luogo di Nascità">
+            <input type="text" name="luogoNascita" id="luogoNascita" placeholder="Luogo di Nascità" required>
             <br>
             <button id="inserisciDatiBtn">Inserisci Dati</button>
         </div>
